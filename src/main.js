@@ -13,11 +13,11 @@ import routes from './routes'
 import Mock from './mock'
 Mock.bootstrap();
 import 'font-awesome/css/font-awesome.min.css'
-
+import setting from '../config/public.json'
 Vue.use(ElementUI)
 Vue.use(VueRouter)
 Vue.use(Vuex)
-
+Vue.prototype.$api = setting.apiUrl
 //NProgress.configure({ showSpinner: false });
 
 const router = new VueRouter({
