@@ -26,7 +26,7 @@
     >
       <el-table-column type="selection" width="55"> </el-table-column>
       <el-table-column type="index" width="60"> </el-table-column>
-      <el-table-column prop="match_name" label="赛事名称" width="120" sortable>
+      <el-table-column prop="match_name" label="赛事名称" width="200" sortable>
       </el-table-column>
       <el-table-column prop="channel_url" label="频道地址" width="280" sortable>
       </el-table-column>
