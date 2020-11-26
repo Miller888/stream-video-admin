@@ -1,5 +1,6 @@
 # 使用方式
 
+* 配置config/public.json，指定api地址
 
 ``` bash
 # 下载项目依赖包
@@ -13,4 +14,3 @@ npm run build
 
 ```
 
-打包完成之后，可以使用任意web容器引入dist
