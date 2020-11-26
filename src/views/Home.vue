@@ -5,7 +5,6 @@
 				{{collapsed?'':sysName}}
 			</el-col>
 			<el-col :span="10">
-
 			</el-col>
 			<el-col :span="4" class="userinfo">
 				<el-dropdown trigger="hover">
@@ -71,7 +70,7 @@
 	export default {
 		data() {
 			return {
-				sysName:'VUEADMIN',
+				sysName:'Live Admin',
 				collapsed:false,
 				sysUserName: '',
 				sysUserAvatar: '',
