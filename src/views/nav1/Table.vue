@@ -3,7 +3,7 @@
     <!--工具条-->
     <el-col :span="24" class="toolbar" style="padding-bottom: 0px">
       <el-form :inline="true" :model="filters">
-		<el-form-item>
+        <el-form-item>
           <el-button type="primary" @click="handleAdd">新增</el-button>
         </el-form-item>
         <el-form-item>
@@ -36,13 +36,15 @@
       </el-table-column>
       <el-table-column label="操作" width="150">
         <template scope="scope">
-          <el-button v-if="!isActiveList"
+          <el-button
+            v-if="!isActiveList"
             type="primary"
             size="small"
             @click="handlePlay(scope.$index, scope.row)"
             >播放</el-button
           >
-          <el-button v-if="isActiveList"
+          <el-button
+            v-if="isActiveList"
             type="danger"
             size="small"
             @click="handleDel(scope.$index, scope.row)"
@@ -125,8 +127,8 @@ export default {
     return {
       filters: {
         name: "",
-	  },
-	  isActiveList:false,
+      },
+      isActiveList: false,
       matchList: [],
       users: [],
       total: 0,
@@ -164,9 +166,8 @@ export default {
       const res = await fetch(`${this.$api}/get_pending_tasks`);
       const resJson = await res.json();
       this.matchList = resJson;
-      console.log(this.matchList);
-	  this.listLoading = false;
-	  this.isActiveList = false;
+      this.listLoading = false;
+      this.isActiveList = false;
     },
     async getActiveMatchList() {
       this.listLoading = true;
@@ -174,8 +175,8 @@ export default {
       const resJson = await res.json();
       this.matchList = resJson;
       console.log(this.matchList);
-	  this.listLoading = false;
-	  this.isActiveList = true;
+      this.listLoading = false;
+      this.isActiveList = true;
     },
     async parseLiveUrl() {
       const url = this.addForm.url;
@@ -224,8 +225,8 @@ export default {
           this.$message({
             message: "停止成功",
             type: "success",
-		  });
-		  this.getActiveMatchList();
+          });
+          this.getActiveMatchList();
           //   this.listLoading = true;
           //   //NProgress.start();
           //   let para = { id: row.id };
@@ -278,18 +279,16 @@ export default {
         if (valid) {
           this.$confirm("确认提交吗？", "提示", {}).then(async () => {
             this.addLoading = true;
-            //NProgress.start();
             let para = Object.assign({}, this.addForm);
             this.addLoading = false;
-            //NProgress.done();
             const url = encodeURI(para.url);
             const res = await fetch(
-              `${this.$api}/create?channel_url=${
-                para.url
-              }&match_name=${para.name}&quality=${this.quality[para.radio]}`
+              `${this.$api}/create?channel_url=${para.url}&match_name=${
+                para.name
+              }&quality=${this.quality[para.radio]}`
             );
             const resJson = await res.json();
-            if (resJson.code == "ok") {
+            if (resJson.code === "ok") {
               this.$message({
                 message: "提交成功",
                 type: "success",
@@ -297,14 +296,25 @@ export default {
               this.$refs["addForm"].resetFields();
               this.quality = [];
               this.addFormVisible = false;
-            } else {
+              await this.getPendingMatchList();
+            } else if (resJson.code === 2) {
               this.$message({
-                message: `提交错误 错误代码: ${resJson.code}`,
+                message: `重复提交，请查看已新增列表`,
                 type: "warning",
               });
               this.$refs["addForm"].resetFields();
               this.quality = [];
               this.addFormVisible = false;
+              await this.getPendingMatchList();
+            } else {
+              this.$message({
+                message: `服务器错误`,
+                type: "warning",
+              });
+              this.$refs["addForm"].resetFields();
+              this.quality = [];
+              this.addFormVisible = false;
+              await this.getPendingMatchList();
             }
           });
         }
@@ -337,7 +347,7 @@ export default {
     },
   },
   mounted() {
-    // this.getUsers();
+    this.getPendingMatchList();
   },
 };
 </script>

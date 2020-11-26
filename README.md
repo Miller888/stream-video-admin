@@ -1,44 +1,16 @@
-# To start
+# 使用方式
 
-This is a project template for [vue-cli](https://github.com/vuejs/vue-cli)
 
 ``` bash
-# install dependencies
+# 下载项目依赖包
 npm install
 
-# serve with hot reload at localhost:8081
+# 热开发启动
 npm run dev
 
-# build for production with minification
+# 打包项目，打包完之后，会产生dist目录
 npm run build
 
 ```
 
-# Folder structure
-* build - webpack config files
-* config - webpack config files
-* dist - build
-* src -your app
-    * api
-    * assets
-    * common
-    * components - your vue components
-    * mock
-    * styles
-    * views - your pages
-    * vuex
-    * App.vue
-    * main.js - main file
-    * routes.js
-* static - static assets
-
-# Theme
-You can change theme by 
-1. Generate theme packages by [https://elementui.github.io/theme-preview/#/](https://elementui.github.io/theme-preview/#/)
-2. Put theme packages in src/assets/theme/
-3. Edit src/main.js 
-``` bash
-   import 'element-ui/lib/theme-default/index.css'
-   to
-   import './assets/theme/your-theme/index.css'
-```
+打包完成之后，可以使用任意web容器引入dist
