@@ -22,10 +22,8 @@
             :picker-options="pickerOptions"
           >
           </el-date-picker>
-        </div>
-        <el-form-item>
           <el-button type="primary" v-on:click="getLiveHistory">查询</el-button>
-        </el-form-item>
+        </div>
       </el-form>
     </el-col>
 
